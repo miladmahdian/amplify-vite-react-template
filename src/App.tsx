@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import type { Schema } from '../amplify/data/resource'
 import { generateClient } from 'aws-amplify/data'
 import { Authenticator } from '@aws-amplify/ui-react'
+
 import '@aws-amplify/ui-react/styles.css'
 
 const client = generateClient<Schema>()
@@ -27,10 +28,10 @@ function App() {
     <main>
       <div>
         <Authenticator>
-          {({ signOut }) => (
+          {({ signOut, user }) => (
             <div>
               <button onClick={signOut}>Sign Out</button>
-              <h1>My todos</h1>
+              <h1>Hello {user?.signInDetails?.loginId}'s todos</h1>
               <button onClick={createTodo}>+ new</button>
               <ul>
                 {todos.map((todo) => (
